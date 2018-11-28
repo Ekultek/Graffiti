@@ -5,6 +5,6 @@
       "type": "dropper",
       "exec": "bash"
     },
-    "payload": "curl -s \"https://web.archive.org/cdx/search/cdx?url=*.[URL]/*&output=text&fl=original&collapse=urlkey\"|sort| sed -e 's_https*://__' -e \"s/\\/.*//\" -e 's/:.*//' -e 's/^www\\.//' | uniq"
+    "payload": "curl -s \"https://web.archive.org/cdx/search/cdx?url=*.[URL]/*&output=text&fl=original&collapse=urlkey\"|sort| sed -e 's_https*://__' -e \"s/\\/.*//\" -e 's/:.*//' -e 's/^www\\.//' | sort -u"
   }
 }
