@@ -268,7 +268,7 @@ class GraffitiTerminal(object):
         """
         check for updates
         """
-        subprocess.call("git pull origin master")
+        subprocess.call(["git", "pull", "origin", "master"])
 
     def do_start(self, save_history, more_commands=None):
         """
