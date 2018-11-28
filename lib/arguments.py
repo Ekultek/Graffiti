@@ -240,16 +240,17 @@ class Parser(ArgumentParser):
                             print("no LHOST or LPORT given, specify and try again")
                             close()
                         else:
-                            usable_data = (conf["graffiti"]["userDefinedLhost"], conf["graffiti"]["userDefinedLport"], None)
+                            graph_data = (conf["graffiti"]["userDefinedLhost"], conf["graffiti"]["userDefinedLport"], None)
                     elif payload_type == "dropper":
                         if conf["graffiti"]["userDefinedURL"] == "":
                             print("no URL specified for the dropper, specify one and try again")
+                            close()
                         else:
-                            usable_data = (None, None, conf["graffiti"]["userDefinedURL"])
+                            graph_data = (None, None, conf["graffiti"]["userDefinedURL"])
                     else:
-                        usable_data = (None, None, None)
+                        graph_data = (None, None, None)
                     encoded_payload = Encoder(
-                        data_json, cursor, usable_data[0], usable_data[1], usable_data[2], conf["graffiti"]["codecToUse"]
+                        data_json, cursor, graph_data[0], graph_data[1], graph_data[2], conf["graffiti"]["codecToUse"]
                     ).encode()
                     if encoded_payload is not None:
                         display_payload(

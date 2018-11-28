@@ -52,7 +52,7 @@ DATABASE_PATH = "{}/graffiti.db".format(CUR_DIR)
 FINISH_PATH_TEMPLATE = "{}/etc/payloads{}"
 
 # version number
-VERSION = "0.1"
+VERSION = "0.2"
 
 # sexy ass banner
 BANNER = """\033[30m

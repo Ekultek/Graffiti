@@ -176,9 +176,9 @@ class GraffitiTerminal(object):
                 technique = encoders[int(choice)]
                 payload_path = FINISH_PATH_TEMPLATE.format(CUR_DIR, selected)
                 payload_data = get_single_payload(payload_path)
-                if payload_data["data"]["information"]["type"].lower() == "dropper":
+                if payload_data["data"]["information"]["type"].lower() in ("dropper", "enum"):
                     usable_data = {"url": raw_input("enter the URL to connect to: "), "lhost": None, "lport": None}
-                elif payload_data["data"]["information"]["type"].lower() == "reverse" or "bind":
+                elif payload_data["data"]["information"]["type"].lower() in ("reverse", "bind"):
                     usable_data = {
                         "url": None, "lhost": raw_input("enter the LHOST: "), "lport": raw_input("enter the LPORT: ")
                     }

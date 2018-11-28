@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "download all nmap scripts",
+      "type": "other",
+      "exec": "bash"
+    },
+    "payload": "for link in $(curl https://svn.nmap.org/nmap/scripts/  | grep -Eoi '<a [^>]+>' | grep -Eo 'href=\"[^\\\"]+\"' | sed 's@href=@@' | sed -e 's/^\"//' -e 's/\"$//'); do wget https://svn.nmap.org/nmap/scripts/${link}; done"
+  }
+}

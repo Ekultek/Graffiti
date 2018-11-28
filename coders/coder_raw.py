@@ -8,7 +8,8 @@ class RawCoder(object):
         "perl": "perl -e '{}'",
         "php": "php -r '{}'",
         "ruby": "ruby -e \"{}\"",
-        "batch": "{}"
+        "batch": "{}",
+        "bash": "{}"
     }
 
     def __init__(self, payload_data, cursor):
