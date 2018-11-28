@@ -1,0 +1,4 @@
+.history/*
+graffiti.db
+.idea/*
+*.pyc

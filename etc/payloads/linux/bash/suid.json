@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "detects files with interesting SUID bits set",
+      "type": "privilege escalation",
+      "exec": "bash"
+    },
+    "payload": "find / -perm -g=s -o -perm -4000 ! -type l -maxdepth 3 -exec ls -ld {} \\; 2>/dev/null"
+  }
+}

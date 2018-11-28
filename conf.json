@@ -1,0 +1,18 @@
+{
+ "graffiti": {
+  "codecToUse": "", 
+  "createNewPayloadPath": "", 
+  "createPayloadFile": "", 
+  "listAvailablePayloads": "", 
+  "moreExternalCommands": "", 
+  "payloadPathToUse": "", 
+  "saveCommandHistory": "", 
+  "useTerminal": false, 
+  "userDefinedLhost": "", 
+  "userDefinedLport": "", 
+  "userDefinedPayload": "", 
+  "userDefinedURL": "", 
+  "viewCached": "", 
+  "wipeData": false
+ }
+}

