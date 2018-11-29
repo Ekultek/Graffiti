@@ -1,0 +1,11 @@
+{
+  "data": {
+    "information": {
+      "__credits": "all credits for this enumeration go to whoever discovered it, i found it here: https://twitter.com/pentest_swissky/status/1067857704369250305",
+      "description": "enumerate subdomains of a website using crt.sh",
+      "type": "enum",
+      "exec": "bash"
+    },
+    "payload": "curl -s \"https:\/\/crt.sh\/?q=%25.[URL]\" | sed 's\/<\\\/\\>[^?]\\+>\/\/g' | sort -u | grep -v \"LIKE\" | grep -v \"crt.sh\" | grep [URL] | sed 's\/     \/\/' | grep -v \"*\" | grep [URL]"
+  }
+}
