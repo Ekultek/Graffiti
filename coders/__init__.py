@@ -3,6 +3,7 @@ from coder_base64 import Base64Encoder
 from coder_raw import RawCoder
 from coder_hex import HexEncoder
 from coder_xor import XorEncoder
+from coder_rot13 import Rot13Encoder
 from lib.jsonize import tuple_to_json
 
 
@@ -26,7 +27,8 @@ class Encoder(object):
             "xor": XorEncoder,
             "base64": Base64Encoder,
             "raw": RawCoder,
-            "hex": HexEncoder
+            "hex": HexEncoder,
+            "rot13":  Rot13Encoder
         }
 
     def fix_payload(self):
