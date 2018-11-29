@@ -1,7 +1,8 @@
 {
   "data": {
     "information": {
-      "description": "enumerate subdomains of a website",
+      "__credits": "all credits for this enumeration go to @CreedHackers (https://twitter.com/CreedHackers)",
+      "description": "enumerate subdomains of a website using web.archive.org",
       "type": "enum",
       "exec": "bash"
     },
