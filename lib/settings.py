@@ -52,7 +52,7 @@ DATABASE_PATH = "{}/graffiti.db".format(CUR_DIR)
 FINISH_PATH_TEMPLATE = "{}/etc/payloads{}"
 
 # version number
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 
 # sexy ass banner
 BANNER = """\033[30m
@@ -249,7 +249,8 @@ def create_external_commands():
         "nmap", "find",
         "ifconfig", "grep",
         "vi", "telnet",
-        "ftp"
+        "ftp", "bash",
+        "python"
     )
     for command in useful_commands:
         retval.add(command)
@@ -274,3 +275,18 @@ def tails(file_object, last_lines=50):
                 lines = list(file_object)
             pos *= 2
     return "".join(lines[-last_lines:])
+
+
+def get_encoders():
+    """
+    get the possible encoding techniques from the coders directory
+    :return:
+    """
+    path = "{}/coders".format(CUR_DIR)
+    bad = (".pyc", "__init__.py")
+    retval = []
+    for c in os.listdir(path):
+        if not any(b in c for b in bad):
+            retval.append(c.split("_")[-1].split(".")[0])
+    return retval
+
