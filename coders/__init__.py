@@ -4,6 +4,8 @@ from coder_raw import RawCoder
 from coder_hex import HexEncoder
 from coder_xor import XorEncoder
 from coder_rot13 import Rot13Encoder
+from coder_atbash import AtBashEncoder
+from coder_aes256 import AESEncrypter
 from lib.jsonize import tuple_to_json
 
 
@@ -28,7 +30,9 @@ class Encoder(object):
             "base64": Base64Encoder,
             "raw": RawCoder,
             "hex": HexEncoder,
-            "rot13":  Rot13Encoder
+            "rot13":  Rot13Encoder,
+            "atbash": AtBashEncoder,
+            "aes256": AESEncrypter
         }
 
     def fix_payload(self):

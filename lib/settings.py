@@ -52,7 +52,7 @@ DATABASE_PATH = "{}/graffiti.db".format(CUR_DIR)
 FINISH_PATH_TEMPLATE = "{}/etc/payloads{}"
 
 # version number
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 
 # sexy ass banner
 BANNER = """\033[30m
@@ -75,7 +75,7 @@ TERMINAL_HELP_MESSAGE = """
  list/show                               List all available payloads
  search <phrase>                         Search for a specific payload
  use <payload> <coder>                   Use this payload and encode it using a specified coder
- info <payload>                          Get information on a specified payload
+ info                                    Get information on all the payloads
  check                                   Check for updates
  history                                 Display command history
  exit/quit                               Exit the terminal and running session
