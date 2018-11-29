@@ -17,7 +17,8 @@ from lib.settings import (
     find_similar,
     display_payload,
     create_external_commands,
-    tails
+    tails,
+    get_encoders
 )
 
 
@@ -164,7 +165,7 @@ class GraffitiTerminal(object):
         """
         use a selected payload, encode it, and stash it in a database for future use
         """
-        encoders = ["base64", "hex", "xor", "raw"]
+        encoders = get_encoders()
         selected_choice = False
         if encoder in encoders:
             choice = encoders.index(encoder)
@@ -176,8 +177,10 @@ class GraffitiTerminal(object):
                 technique = encoders[int(choice)]
                 payload_path = FINISH_PATH_TEMPLATE.format(CUR_DIR, selected)
                 payload_data = get_single_payload(payload_path)
-                if payload_data["data"]["information"]["type"].lower() in ("dropper", "enum"):
+                if payload_data["data"]["information"]["type"].lower() == "dropper":
                     usable_data = {"url": raw_input("enter the URL to connect to: "), "lhost": None, "lport": None}
+                elif payload_data["data"]["information"]["type"].lower() == "enum":
+                    usable_data = {"url": raw_input("enter the domain to enumerate: "), "lhost": None, "lport": None}
                 elif payload_data["data"]["information"]["type"].lower() in ("reverse", "bind"):
                     usable_data = {
                         "url": None, "lhost": raw_input("enter the LHOST: "), "lport": raw_input("enter the LPORT: ")
@@ -223,7 +226,7 @@ class GraffitiTerminal(object):
             full_path = FINISH_PATH_TEMPLATE.format(CUR_DIR, path)
             with open(full_path) as f:
                 data = json.load(f)
-                print("Script type: {}\nExecution type: {}\nInformation: {}\nFull path: {}\n\n".format(
+                print("\nScript type: {}\nExecution type: {}\nInformation: {}\nFull path: {}".format(
                     data["data"]["information"]["exec"],
                     data["data"]["information"]["type"],
                     data["data"]["information"]["description"],
@@ -326,7 +329,9 @@ class GraffitiTerminal(object):
                             self.do_display_command_history()
                         elif "use" in choice:
                             if len(choice_data) != 3:
-                                print("must specify a payload and an encoding technique (xor, base64, raw, hex)")
+                                print("must specify a payload and an encoding technique ({})".format(
+                                    ", ".join(get_encoders())
+                                ))
                             else:
                                 encoded_payload = self.do_use_payload(choice_data[1], choice_data[-1])
                                 if encoded_payload is not None:
