@@ -247,6 +247,12 @@ class Parser(ArgumentParser):
                             close()
                         else:
                             graph_data = (None, None, conf["graffiti"]["userDefinedURL"])
+                    elif payload_type == "enum":
+                        if conf["graffiti"]["userDefinedURL"] == "":
+                            print("no domain specified for the enumeration, specify one and try again")
+                            close()
+                        else:
+                            graph_data = (None, None, conf["graffiti"]["userDefinedURL"])
                     else:
                         graph_data = (None, None, None)
                     encoded_payload = Encoder(
