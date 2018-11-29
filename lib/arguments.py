@@ -24,7 +24,8 @@ from lib.settings import (
     HISTORY_FILES_PATH,
     DATABASE_PATH,
     get_history_files,
-    BANNER
+    BANNER,
+    get_encoders
 )
 
 
@@ -44,7 +45,7 @@ class Parser(ArgumentParser):
         """
         parser = ArgumentParser()
         parser.add_argument(
-            "-c", "--codec", metavar="CODEC", choices=["base64", "hex", "raw", "xor"], dest="codecToUse",
+            "-c", "--codec", metavar="CODEC", choices=get_encoders(), dest="codecToUse",
             help="specify an encoding technique (*default=None)", default=None
         )
         parser.add_argument(
