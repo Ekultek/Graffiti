@@ -52,7 +52,7 @@ DATABASE_PATH = "{}/graffiti.db".format(CUR_DIR)
 FINISH_PATH_TEMPLATE = "{}/etc/payloads{}"
 
 # version number
-VERSION = "0.0.4"
+VERSION = "0.0.5"
 
 # sexy ass banner
 BANNER = """\033[30m
@@ -191,10 +191,8 @@ def find_similar(command, internal, external):
     return retval
 
 
-def display_payload(payload, is_xor=False):
+def display_payload(payload):
     sep = "-" * 50
-    if is_xor:
-        payload = repr(payload)
     print(
         "Encoded Payload:\n{}\n\n{}\n\n{}\n".format(
             sep, payload, sep

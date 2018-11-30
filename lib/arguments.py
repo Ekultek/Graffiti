@@ -1,4 +1,5 @@
 import json
+import string
 from argparse import ArgumentParser
 
 from coders import Encoder
@@ -182,9 +183,12 @@ class Parser(ArgumentParser):
         if conf["graffiti"]["viewCached"]:
             print("total of {} payloads present".format(len(cached_payloads)))
             for cache in cached_payloads:
+                non_chars = False
+                if any(c not in string.printable for c in cache[1]):
+                    non_chars = True
                 print(
                     "\nLanguage: {}\nPayload Type: {}\nPayload: {}".format(
-                        cache[-1], cache[-2], str(repr(cache[1]))
+                        cache[-1], cache[-2], str(cache[1]) if not non_chars else str(repr(cache[1]))
                     )
                 )
             close()
@@ -260,10 +264,7 @@ class Parser(ArgumentParser):
                         data_json, cursor, graph_data[0], graph_data[1], graph_data[2], conf["graffiti"]["codecToUse"]
                     ).encode()
                     if encoded_payload is not None:
-                        display_payload(
-                            encoded_payload[0],
-                            is_xor=True if conf["graffiti"]["codecToUse"].lower() == "xor" else False
-                        )
+                        display_payload(encoded_payload[0])
                     else:
                         print("dumping raw encoded payload")
                         display_payload(data_json["data"]["payload"])
