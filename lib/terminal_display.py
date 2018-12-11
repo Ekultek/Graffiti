@@ -138,8 +138,14 @@ class GraffitiTerminal(object):
             print(truncacted_history)
             print("history truncated to last 50 lines")
         else:
-            for item in self.history:
-                print(item)
+            for i, item in enumerate(self.history, start=1):
+                if len(list(str(i))) == 2:
+                    spacer1, spacer2 = "  ", "   "
+                elif len(list(str(i))) == 3:
+                    spacer1, spacer2 = " ", "   "
+                else:
+                    spacer1, spacer2 = "   ", "   "
+                print("{}{}{}{}".format(spacer1, i, spacer2, item))
 
     def do_display_cached(self):
         """

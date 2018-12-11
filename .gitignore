@@ -2,3 +2,4 @@
 graffiti.db
 .idea/*
 *.pyc
+.DS_Store

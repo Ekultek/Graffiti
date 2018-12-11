@@ -16,7 +16,7 @@ class Base64Encoder(object):
                     '[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("{}"))'
                 ),
         "python": "python -c 'exec(\"{}\".decode(\"base64\"))'",
-        "perl": "perl -MMIME::Base64::decode_base64 -e 'eval print decode_base64 join\"\",<>' {}",
+        "perl": "perl -MMIME::Base64::decode_base64 -e 'eval print decode_base64 join\"\",<>' '{}'",
         "bash": "STRING=$(echo \"{}\" | base64 --decode);eval $STRING",
         "ruby": "ruby -e \"require \\\"base64\\\";eval(Base64.decode64(\\\"{}\\\"))\"",
         "php": "php -r 'exec(base64_decode(\"{}\"));'",
