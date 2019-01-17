@@ -40,7 +40,8 @@ class GraffitiTerminal(object):
         "use", "info", "history",
         "exit", "quit", "?", "help",
         "check", "cached", "encode",
-        "external"
+        "external", "mem", "memory",
+        "stored"
     ]
     # available external terminal commands that are taken out of the `/bin` folder
     # I also added some other commands that i thought would be useful, you can also
@@ -323,15 +324,15 @@ class GraffitiTerminal(object):
                             choice_data = choice.split(" ")
                         except:
                             choice_data = None
-                        if choice == "help" or choice == "?":
+                        if any(c == choice for c in ["help", "?"]):
                             self.do_display_help()
-                        elif choice == "list" or choice == "show":
+                        elif any(c == choice for c in ["list", "show"]):
                             self.do_display_available()
-                        elif choice == "cached":
+                        elif any(c == choice for c in ["cached", "stored"]):
                             self.do_display_cached()
                         elif choice == "external":
                             self.do_list_external_commands()
-                        elif choice == "history":
+                        elif any(c == choice for c in ["history", "mem", "memory"]):
                             self.do_display_command_history()
                         elif "use" in choice:
                             if len(choice_data) != 3:
