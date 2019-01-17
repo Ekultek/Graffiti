@@ -52,7 +52,7 @@ DATABASE_PATH = "{}/graffiti.db".format(CUR_DIR)
 FINISH_PATH_TEMPLATE = "{}/etc/payloads{}"
 
 # version number
-VERSION = "0.0.6"
+VERSION = "0.0.7"
 
 # sexy ass banner
 BANNER = """\033[30m
@@ -71,15 +71,16 @@ TERMINAL_HELP_MESSAGE = """
 ---------                                --------------
  help/?                                  Show this help
  external                                List available external commands
- cached                                  Display all payloads that are already in the database
+ cached/stored                           Display all payloads that are already in the database
  list/show                               List all available payloads
  search <phrase>                         Search for a specific payload
  use <payload> <coder>                   Use this payload and encode it using a specified coder
  info                                    Get information on all the payloads
  check                                   Check for updates
- history                                 Display command history
+ history/mem[ory]                        Display command history
  exit/quit                               Exit the terminal and running session
  encode <script-type> <coder>            Encode a provided payload
+ check                                   Check for updates
 """
 
 
@@ -92,18 +93,32 @@ def complete(keywords):
     readline.parse_and_bind('tab: complete')
 
 
-def get_payload_paths():
+def get_payload_paths(is_list=False):
     """
     get all the paths to the available payloads
     """
-    retval = []
-    available_payloads = []
-    for path, _, files in os.walk(PAYLOADS_PATH):
-        for name in [f for f in files if f.endswith(".json")]:
-            available_payloads.append(os.path.join(path, name))
-    for path in available_payloads:
-        path = path.split("payloads")[-1]
-        retval.append(path)
+    if not is_list:
+        retval = {}
+        available_payloads = []
+        for path, _, files in os.walk(PAYLOADS_PATH):
+            for name in [f for f in files if f.endswith(".json")]:
+                available_payloads.append(os.path.join(path, name))
+        for path in available_payloads:
+            os_specific = path.split("payload")[-1].split("/")[1]
+            retval[os_specific] = []
+        for path in available_payloads:
+            path = path.split("payloads")[-1]
+            os_type = path.split("/")[1]
+            retval[os_type].append(path)
+    else:
+        retval = []
+        available_payloads = []
+        for path, _, files in os.walk(PAYLOADS_PATH):
+            for name in [f for f in files if f.endswith(".json")]:
+                available_payloads.append(os.path.join(path, name))
+        for path in available_payloads:
+            path = path.split("payloads")[-1]
+            retval.append(path)
     return retval
 
 
@@ -248,7 +263,7 @@ def create_external_commands():
         "ifconfig", "grep",
         "vi", "telnet",
         "ftp", "bash",
-        "python"
+        "python", "nc"
     )
     for command in useful_commands:
         retval.add(command)
