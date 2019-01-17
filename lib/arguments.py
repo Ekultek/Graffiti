@@ -236,7 +236,7 @@ class Parser(ArgumentParser):
                         print(encoded[0])
                         close()
             elif conf["graffiti"]["payloadPathToUse"] != "":
-                useable_payload_paths = get_payload_paths()
+                useable_payload_paths = get_payload_paths(is_list=True)
                 if conf["graffiti"]["payloadPathToUse"] in useable_payload_paths:
                     full_path = FINISH_PATH_TEMPLATE.format(CUR_DIR, conf["graffiti"]["payloadPathToUse"])
                     data_json = get_single_payload(full_path)
@@ -268,7 +268,10 @@ class Parser(ArgumentParser):
                         display_payload(encoded_payload[0])
                     else:
                         print("dumping raw encoded payload")
-                        display_payload(data_json["data"]["payload"])
+                        encoded_payload = Encoder(
+                            data_json, cursor, graph_data[0], graph_data[1], graph_data[2], "raw"
+                        ).encode()
+                        display_payload(encoded_payload[0])
                     close()
                 else:
                     print("unknown payload path, do you want to make a payload?")

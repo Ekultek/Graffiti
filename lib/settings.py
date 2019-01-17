@@ -52,7 +52,7 @@ DATABASE_PATH = "{}/graffiti.db".format(CUR_DIR)
 FINISH_PATH_TEMPLATE = "{}/etc/payloads{}"
 
 # version number
-VERSION = "0.0.7"
+VERSION = "0.0.8"
 
 # sexy ass banner
 BANNER = """\033[30m
@@ -207,12 +207,7 @@ def find_similar(command, internal, external):
 
 
 def display_payload(payload):
-    sep = "-" * 50
-    print(
-        "Encoded Payload:\n{}\n\n{}\n\n{}\n".format(
-            sep, payload, sep
-        )
-    )
+    print(payload)
 
 
 def get_history_files(path):

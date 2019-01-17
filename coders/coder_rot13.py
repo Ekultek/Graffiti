@@ -29,7 +29,7 @@ class Rot13Encoder(object):
         else:
             payload = ""
         if payload == "":
-            raise UnacceptableExecType("{} is not able to be encoded into Base64".format(self.exec_type))
+            raise UnacceptableExecType("{} is not able to be encoded into Rot13".format(self.exec_type))
 
         retval = payload.format(encoded_payload)
         is_inserted = insert_payload(retval, self.payload_type, self.exec_type, self.cursor)
