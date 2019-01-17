@@ -169,16 +169,17 @@ class Parser(ArgumentParser):
                 "no arguments have been passed, dropping into terminal type `help/?` to get help, "
                 "all commands that sit inside of `/bin` are available in the terminal"
             )
-            available_payloads = get_payload_paths()
+            available_payloads = get_payload_paths(is_list=True)
             GraffitiTerminal(
                 cached_payloads, available_payloads, cursor
             ).do_start(conf["graffiti"]["saveCommandHistory"])
             exit()
         if conf["graffiti"]["listAvailablePayloads"]:
             available_payloads = get_payload_paths()
-            print("total of {} payloads available\n".format(len(available_payloads)))
-            for payload in available_payloads:
-                print(payload)
+            for os_spec in available_payloads.keys():
+                print("\n\033[4m{} payloads:\033[0m\n".format(os_spec.title()))
+                for payload in available_payloads[os_spec]:
+                    print(payload)
             close()
         if conf["graffiti"]["viewCached"]:
             print("total of {} payloads present".format(len(cached_payloads)))
