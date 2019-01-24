@@ -12,6 +12,7 @@
   "userDefinedLport": "", 
   "userDefinedPayload": "", 
   "userDefinedURL": "", 
+  "viewAvailableCodecs": false, 
   "viewCached": "", 
   "wipeData": false
  }

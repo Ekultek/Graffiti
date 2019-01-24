@@ -20,6 +20,7 @@ class HexEncoder(object):
         "batch": "Powershell.exe -exec bypass IEX "
                       "(\"{}\"-split\"(..)\"|?{{$_}}|%{{[char][convert]::ToInt16($_,16)}})-join"""
     }
+    acceptable_exec_types = ("powershell", "php", "python", "perl", "ruby", "bash", "batch")
 
     def __init__(self, payload_data, cursor):
         self.payload = payload_data["data"]["payload"]
@@ -29,9 +30,8 @@ class HexEncoder(object):
 
     def encode(self):
         hexlify = lambda x: "".join([hex(ord(c))[2:].zfill(2) for c in x])
-        acceptable_exec_types = ("powershell", "php", "python", "perl", "ruby", "bash", "batch")
         encoded_payload = hexlify(self.payload)
-        if self.exec_type in acceptable_exec_types:
+        if self.exec_type in self.acceptable_exec_types:
             payload = self.payload_starts[self.exec_type]
         else:
             payload = ""

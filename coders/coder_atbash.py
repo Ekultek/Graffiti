@@ -4,7 +4,7 @@ from lib.database import insert_payload
 from lib.settings import UnacceptableExecType
 
 
-class AtBashEncoder(object):
+class AtbashEncoder(object):
 
     payload_starts = {
         "python": (
@@ -13,6 +13,7 @@ class AtBashEncoder(object):
             "r_l=a_l[::-1];exec(\"\".join([r_l[a_l.index(c)] if c in r_l else c for c in \"{}\"]))'"
         )
     }
+    acceptable_exec_types = ("python",)
 
     def __init__(self, payload_data, cursor):
         self.payload = payload_data["data"]["payload"]
@@ -32,8 +33,7 @@ class AtBashEncoder(object):
         return ''.join(retval)
 
     def encode(self):
-        acceptable_exec_types = ("python",)
-        if self.exec_type in acceptable_exec_types:
+        if self.exec_type in self.acceptable_exec_types:
             usable_payload = []
             for c in self.payload:
                 if c == '"':

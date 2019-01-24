@@ -102,6 +102,10 @@ class Parser(ArgumentParser):
             help="pass more external commands, this will allow them to be accessed inside of the terminal "
                  "commands must be in your PATH (*default=None)"
         )
+        parser.add_argument(
+            "-Vc", "--view-codecs", default=False, dest="viewAvailableCodecs", action="store_true",
+            help="view the current available encoding codecs and their compatible languages"
+        )
         return parser.parse_args()
 
     @staticmethod
@@ -139,6 +143,9 @@ class Parser(ArgumentParser):
             if opts.userDefinedLhost is not None:
                 data["graffiti"]["userDefinedLhost"] = opts.userDefinedLhost
                 is_single_arg.append(len(is_single_arg))
+            if opts.viewAvailableCodecs:
+                data["graffiti"]["viewAvailableCodecs"] = opts.viewAvailableCodecs
+                is_single_arg.append(len(is_single_arg))
             if opts.userDefinedURL is not None:
                 data["graffiti"]["userDefinedURL"] = opts.userDefinedURL
                 is_single_arg.append("1")
@@ -174,6 +181,12 @@ class Parser(ArgumentParser):
                 cached_payloads, available_payloads, cursor
             ).do_start(conf["graffiti"]["saveCommandHistory"])
             exit()
+        if conf["graffiti"]["viewAvailableCodecs"]:
+            codecs = get_encoders(is_view_all=True).return_encoders()
+            print("\033[4mCODEC:\033[0m\t\t\033[4mACCEPTABLE:\033[0m")
+            for item in codecs.keys():
+                print("{}\t\t{}".format(item, ','.join(codecs[item])))
+            close()
         if conf["graffiti"]["listAvailablePayloads"]:
             available_payloads = get_payload_paths()
             for os_spec in available_payloads.keys():
@@ -242,7 +255,7 @@ class Parser(ArgumentParser):
                     data_json = get_single_payload(full_path)
                     payload_type = data_json["data"]["information"]["type"]
                     if payload_type == "reverse":
-                        if conf["graffiti"]["userDefinedLhost"] == "" or conf["graffiti"]["userDefinedLport"] == "":
+                        if conf["graffiti"]["userDefinedLhost"].isspace() or conf["graffiti"]["userDefinedLport"] == "":
                             print("no LHOST or LPORT given, specify and try again")
                             close()
                         else:
@@ -296,3 +309,4 @@ class Parser(ArgumentParser):
                     ",".join(acceptable_operating_systems))
                 )
                 close()
+        close()

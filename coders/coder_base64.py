@@ -27,6 +27,7 @@ class Base64Encoder(object):
                     '[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("{}"))'
                 ),
     }
+    acceptable_exec_types = ("powershell", "php", "python", "perl", "ruby", "bash", "batch")
 
     def __init__(self, payload_data, cursor):
         self.payload = payload_data["data"]["payload"]
@@ -36,8 +37,7 @@ class Base64Encoder(object):
 
     def encode(self):
         encoded_payload = base64.b64encode(self.payload)
-        acceptable_exec_types = ("powershell", "php", "python", "perl", "ruby", "bash", "batch")
-        if self.exec_type.lower() in acceptable_exec_types:
+        if self.exec_type.lower() in self.acceptable_exec_types:
             payload = self.payload_starts[self.exec_type]
         else:
             payload = ""

@@ -1,6 +1,7 @@
 from lib.database import insert_payload
 
-class RawCoder(object):
+
+class RawEncoder(object):
 
     payload_starts = {
         "powershell": "Powershell.exe -exec bypass IEX {}",
@@ -11,6 +12,7 @@ class RawCoder(object):
         "batch": "{}",
         "bash": "{}"
     }
+    acceptable_exec_types = ("powershell", "php", "python", "perl", "ruby", "bash", "batch")
 
     def __init__(self, payload_data, cursor):
         self.payload = payload_data["data"]["payload"]
@@ -19,8 +21,7 @@ class RawCoder(object):
         self.cursor = cursor
 
     def encode(self):
-        acceptable_exec_types = ("powershell", "php", "python", "perl", "ruby", "bash", "batch")
-        if self.exec_type in acceptable_exec_types:
+        if self.exec_type in self.acceptable_exec_types:
             payload = self.payload_starts[self.exec_type]
         else:
             payload = self.payload

@@ -23,6 +23,7 @@ class XorEncoder(object):
         ),
 
     }
+    acceptable_exec_types = ("php", "python")
 
     def __init__(self, payload_data, cursor):
         self.payload = payload_data["data"]["payload"]
@@ -45,9 +46,8 @@ class XorEncoder(object):
 
     def encode(self):
         data = self.xor_string()
-        acceptable_exec_types = ("php", "python")
         encoded_payload, key = data
-        if self.exec_type in acceptable_exec_types:
+        if self.exec_type in self.acceptable_exec_types:
             payload = self.payload_starts[self.exec_type]
         else:
             payload = ""

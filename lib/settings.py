@@ -52,7 +52,7 @@ DATABASE_PATH = "{}/graffiti.db".format(CUR_DIR)
 FINISH_PATH_TEMPLATE = "{}/etc/payloads{}"
 
 # version number
-VERSION = "0.0.8"
+VERSION = "0.0.9"
 
 # sexy ass banner
 BANNER = """\033[30m
@@ -158,7 +158,8 @@ def rewrite_config():
             "useTerminal": False,
             "saveCommandHistory": "",
             "wipeData": False,
-            "moreExternalCommands": ""
+            "moreExternalCommands": "",
+            "viewAvailableCodecs": False
         }
     }
     with open(CONFIG_PATH, "w") as conf:
@@ -285,7 +286,7 @@ def tails(file_object, last_lines=50):
     return "".join(lines[-last_lines:])
 
 
-def get_encoders():
+def get_encoders(is_view_all=False):
     """
     get the possible encoding techniques from the coders directory
     :return:
@@ -296,5 +297,9 @@ def get_encoders():
     for c in os.listdir(path):
         if not any(b in c for b in bad):
             retval.append(c.split("_")[-1].split(".")[0])
+    if is_view_all:
+        from coders import Encoder
+
+        retval = Encoder(None, None, None, None, None, None, get_encoders=True)
     return retval
 

@@ -8,6 +8,7 @@ class Rot13Encoder(object):
         "python": "python -c 'exec(\"{}\".decode(\"rot13\"))'",
         "ruby": "ruby -e \"str='{}';eval(str.tr 'A-Za-z', 'N-ZA-Mn-za-m')\"",
     }
+    acceptable_exec_types = ("python", "ruby")
 
     def __init__(self, payload_data, cursor):
         self.payload = payload_data["data"]["payload"]
@@ -16,7 +17,6 @@ class Rot13Encoder(object):
         self.cursor = cursor
 
     def encode(self):
-        acceptable_exec_types = ("python", "ruby")
         tmp = []
         for char in list(self.payload):
             if char == '"':
@@ -24,7 +24,7 @@ class Rot13Encoder(object):
             tmp.append(char)
         usable_payload = "".join(tmp)
         encoded_payload = usable_payload.encode("rot13")
-        if self.exec_type.lower() in acceptable_exec_types:
+        if self.exec_type.lower() in self.acceptable_exec_types:
             payload = self.payload_starts[self.exec_type]
         else:
             payload = ""

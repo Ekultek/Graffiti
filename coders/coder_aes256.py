@@ -1,7 +1,4 @@
-import os
 import base64
-import string
-import random
 import binascii
 
 from lib.database import insert_payload
@@ -19,7 +16,7 @@ except:
     close()
 
 
-class AESEncrypter(object):
+class AESEncoder(object):
 
     payload_starts = {
         "python": (
@@ -30,6 +27,7 @@ class AESEncrypter(object):
             "a=AES.new(dk,AES.MODE_CBC,counter=co);r=a.decrypt(ct);exec(str(r))'"
         )
     }
+    acceptable_exec_types = ("python",)
 
     def __init__(self, payload_data, cursor):
         self.payload = payload_data["data"]["payload"]
@@ -39,8 +37,7 @@ class AESEncrypter(object):
         self.key_bytes = 32
 
     def encode(self):
-        acceptable_exec_types = ("python",)
-        if self.exec_type.lower() in acceptable_exec_types:
+        if self.exec_type.lower() in self.acceptable_exec_types:
             if self.exec_type == "python":
                 print("be sure that the target has PyCrypto on their system!")
             payload = self.payload_starts[self.exec_type]
