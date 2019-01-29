@@ -280,7 +280,7 @@ class Parser(ArgumentParser):
                     if encoded_payload is not None:
                         display_payload(encoded_payload[0])
                     else:
-                        print("dumping raw encoded payload")
+                        print("# dumping raw encoded payload")
                         encoded_payload = Encoder(
                             data_json, cursor, graph_data[0], graph_data[1], graph_data[2], "raw"
                         ).encode()

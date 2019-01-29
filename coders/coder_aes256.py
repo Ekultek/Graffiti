@@ -12,8 +12,7 @@ try:
     from Crypto.Cipher import AES
     from Crypto.Util import Counter
 except:
-    print("you need to install PyCrypto in order to use AES encoding `pip install pycrypto`")
-    close()
+    print("# you need to install PyCrypto in order to use AES encoding `pip install pycrypto`")
 
 
 class AESEncoder(object):
@@ -39,7 +38,7 @@ class AESEncoder(object):
     def encode(self):
         if self.exec_type.lower() in self.acceptable_exec_types:
             if self.exec_type == "python":
-                print("be sure that the target has PyCrypto on their system!")
+                print("# be sure that the target has PyCrypto on their system!")
             payload = self.payload_starts[self.exec_type]
             iv = Random.new().read(AES.block_size)
             iv_int = int(binascii.hexlify(iv), 16)
